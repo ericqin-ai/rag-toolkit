@@ -1,0 +1,8 @@
+{"id":"q1","query":"Python uv pytest","relevant_doc_ids":["python"]}
+{"id":"q2","query":"FAISS CPU 向量","relevant_doc_ids":["faiss"]}
+{"id":"q3","query":"BM25 词频 文档长度","relevant_doc_ids":["bm25"]}
+{"id":"q4","query":"RRF 排名融合","relevant_doc_ids":["rrf"]}
+{"id":"q5","query":"CrossEncoder 重新排序","relevant_doc_ids":["rerank"]}
+{"id":"q6","query":"Hit Recall MRR NDCG","relevant_doc_ids":["metrics"]}
+{"id":"q7","query":"稠密检索","relevant_doc_ids":["faiss","rrf"]}
+{"id":"q8","query":"词频 编码","relevant_doc_ids":["bm25","rerank"]}

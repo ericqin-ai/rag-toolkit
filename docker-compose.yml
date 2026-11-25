@@ -1,0 +1,52 @@
+name: rag-toolkit
+
+x-runtime: &runtime
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: rag-toolkit:dev
+  init: true
+  environment:
+    RAG_TOOLKIT_CONFIG: /app/configs/offline.yaml
+  restart: unless-stopped
+
+services:
+  api:
+    <<: *runtime
+    command:
+      - uvicorn
+      - rag_toolkit.api.app:create_app
+      - --factory
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --workers
+      - "1"
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).close()"]
+      interval: 15s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+
+  inspector:
+    <<: *runtime
+    command:
+      - streamlit
+      - run
+      - src/rag_toolkit/web/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+      - --browser.gatherUsageStats=false
+    ports:
+      - "127.0.0.1:8501:8501"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=5).close()"]
+      interval: 15s
+      timeout: 10s
+      start_period: 30s
+      retries: 3

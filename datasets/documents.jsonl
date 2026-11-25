@@ -1,0 +1,6 @@
+{"id":"python","text":"Python 使用 uv 管理依赖，使用 pytest 执行单元测试。","metadata":{"topic":"engineering"}}
+{"id":"faiss","text":"FAISS 在 CPU 上进行稠密向量近邻搜索，支持余弦相似度检索。","metadata":{"topic":"retrieval"}}
+{"id":"bm25","text":"BM25 使用词频、逆文档频率和文档长度进行关键词检索。","metadata":{"topic":"retrieval"}}
+{"id":"rrf","text":"RRF 根据各检索列表的排名融合 BM25 和稠密检索结果。","metadata":{"topic":"fusion"}}
+{"id":"rerank","text":"CrossEncoder 对查询和候选文本联合编码，为候选重新排序。","metadata":{"topic":"reranking"}}
+{"id":"metrics","text":"检索评测包含 Hit Recall MRR NDCG，衡量命中、召回与排名质量。","metadata":{"topic":"evaluation"}}

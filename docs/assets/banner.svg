@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
+  <title id="title">RAG Toolkit</title>
+  <desc id="desc">Modular retrieval, transparent ranking, reproducible evaluation. Python 3.11+, CPU first, MIT.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#17334b"/></linearGradient></defs>
+  <rect width="1200" height="280" rx="20" fill="url(#bg)"/>
+  <circle cx="1100" cy="40" r="190" fill="#67e8f9" opacity=".04"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="48" y="52" fill="#5eead4" font-size="13" letter-spacing="3">RETRIEVAL / EXPLAINABILITY / EVALUATION</text>
+    <text x="46" y="118" fill="#f8fafc" font-size="58" font-weight="700">RAG Toolkit</text>
+    <text x="48" y="157" fill="#cbd5e1" font-size="18">Modular search. Transparent ranking. Reproducible evaluation.</text>
+    <g fill="#153a47" stroke="#2b6570"><rect x="48" y="192" width="122" height="32" rx="16"/><rect x="182" y="192" width="110" height="32" rx="16"/><rect x="304" y="192" width="72" height="32" rx="16"/></g>
+    <g fill="#c5f8ee" font-size="13" text-anchor="middle"><text x="109" y="213">Python 3.11+</text><text x="237" y="213">CPU first</text><text x="340" y="213">MIT</text></g>
+    <g transform="translate(770 86)" text-anchor="middle" font-size="14">
+      <path d="M0 40H270" stroke="#5eead4" stroke-width="3"/>
+      <g fill="#17334b" stroke="#5eead4" stroke-width="2"><rect x="-38" width="86" height="80" rx="14"/><rect x="94" width="86" height="80" rx="14"/><rect x="226" width="86" height="80" rx="14"/></g>
+      <g fill="#e2e8f0"><text x="5" y="35">Retrieve</text><text x="5" y="56" font-size="11" fill="#94a3b8">BM25 + Dense</text><text x="137" y="35">Rerank</text><text x="137" y="56" font-size="11" fill="#94a3b8">Fuse + Score</text><text x="269" y="35">Inspect</text><text x="269" y="56" font-size="11" fill="#94a3b8">Trace + Eval</text></g>
+    </g>
+    <text x="48" y="256" fill="#94a3b8" font-size="12">FAISS · HYBRID SEARCH · FASTAPI · STREAMLIT</text>
+  </g>
+</svg>

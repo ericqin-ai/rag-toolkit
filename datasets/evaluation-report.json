@@ -1,0 +1,193 @@
+{
+  "metrics": {
+    "mrr": 1.0,
+    "hit@1": 1.0,
+    "recall@1": 0.875,
+    "ndcg@1": 1.0,
+    "hit@3": 1.0,
+    "recall@3": 1.0,
+    "ndcg@3": 1.0,
+    "hit@5": 1.0,
+    "recall@5": 1.0,
+    "ndcg@5": 1.0
+  },
+  "num_queries": 8,
+  "per_query": [
+    {
+      "query": "Python uv pytest",
+      "ranking": [
+        "python",
+        "bm25",
+        "faiss",
+        "metrics",
+        "rerank"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "FAISS CPU 向量",
+      "ranking": [
+        "faiss",
+        "metrics",
+        "bm25",
+        "python",
+        "rerank"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "BM25 词频 文档长度",
+      "ranking": [
+        "bm25",
+        "faiss",
+        "rerank",
+        "rrf",
+        "metrics"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "RRF 排名融合",
+      "ranking": [
+        "rrf",
+        "metrics",
+        "rerank",
+        "bm25",
+        "faiss"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "CrossEncoder 重新排序",
+      "ranking": [
+        "rerank",
+        "metrics",
+        "rrf",
+        "bm25",
+        "faiss"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "Hit Recall MRR NDCG",
+      "ranking": [
+        "metrics",
+        "bm25",
+        "faiss",
+        "python",
+        "rerank"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "稠密检索",
+      "ranking": [
+        "faiss",
+        "rrf",
+        "bm25",
+        "metrics",
+        "python"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 0.5,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    },
+    {
+      "query": "词频 编码",
+      "ranking": [
+        "bm25",
+        "rerank",
+        "faiss",
+        "metrics",
+        "python"
+      ],
+      "metrics": {
+        "mrr": 1.0,
+        "hit@1": 1.0,
+        "recall@1": 0.5,
+        "ndcg@1": 1.0,
+        "hit@3": 1.0,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit@5": 1.0,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+splitter:
+  type: fixed
+  chunk_size: 512
+  chunk_overlap: 64
+embedding:
+  provider: hash_stub
+  dimension: 256
+store:
+  type: faiss
+retriever:
+  mode: hybrid
+  bm25_top_k: 20
+  dense_top_k: 20
+fusion:
+  method: rrf
+  rrf_k: 60
+reranker:
+  enabled: true
+  provider: token_overlap
+  top_k: 10

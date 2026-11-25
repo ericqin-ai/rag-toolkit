@@ -1,0 +1,21 @@
+splitter:
+  type: fixed
+  chunk_size: 512
+  chunk_overlap: 64
+embedding:
+  provider: local
+  model_name: BAAI/bge-small-zh-v1.5
+store:
+  type: faiss
+retriever:
+  mode: hybrid
+  bm25_top_k: 20
+  dense_top_k: 20
+fusion:
+  method: rrf
+  rrf_k: 60
+  weights: { bm25: 0.4, dense: 0.6 }
+reranker:
+  enabled: false
+  model_name: BAAI/bge-reranker-base
+  top_k: 10
