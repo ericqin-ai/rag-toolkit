@@ -10,6 +10,7 @@
 | [Benchmarks](benchmarks.md) | No real-model claims; actual offline sample and future protocol |
 | [Known limits](limitations.md) | Durability, integrations, scale, diagnostics and operational boundaries |
 | [Screenshots](screenshots.md) | Real browser captures, layout checks and local reproduction |
+| [README brand review](readme-refresh.md) | Reference analysis, migration, previews and verification |
 | [Round 1 design](v02-round1-design.md) | Core workbench service/page design |
 | [Round 2 plan](v02-round2-plan.md) | Remaining pages and recorded acceptance |
 

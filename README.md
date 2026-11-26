@@ -1,98 +1,50 @@
-# RAG Toolkit
-
-![RAG Toolkit — Retrieval Workbench](docs/assets/banner.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner-light.svg">
+  <img alt="rag-toolkit — Build. Inspect. Compare. Evaluate." src="docs/assets/banner-light.svg" width="1200">
+</picture>
 
 [![CI](https://github.com/ericqin-ai/rag-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/ericqin-ai/rag-toolkit/actions/workflows/ci.yml)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-6366F1)](pyproject.toml)
+[![MIT License](https://img.shields.io/badge/license-MIT-6366F1)](LICENSE)
 
 **English** | [简体中文](README.zh-CN.md)
 
-## Introduction
+# rag-toolkit
 
-A lightweight Python retrieval toolkit and bilingual Retrieval Workbench for
-hybrid search, reranking, inspection and evaluation. Use a Python SDK, FastAPI,
-or seven Streamlit pages backed by real retrieval operations. This project retrieves
-and evaluates evidence; it does not generate LLM answers.
+**An open-source workbench for retrieval engineering.**
 
-## Why RAG Toolkit
+Build hybrid retrieval pipelines, inspect candidate rankings, compare strategies,
+and evaluate retrieval quality with a Python SDK and a visual workbench.
+Designed for retrieval engineers working with their own documents and relevance labels.
 
-- Inspect all stage candidates, scores, ranks and timings instead of only final hits.
-- Compare lexical/dense/fusion/reranker changes on the same data and annotations.
-- Start with a CPU-only offline sanity pipeline; configure real providers separately.
-- Keep BM25 and Dense visible as independent recall sources, with explicit index
-  rebuild boundaries and safe configuration export.
+[Quick start](#quick-start) · [Documentation](docs/index.md) · [Screenshots](docs/screenshots.md)
 
-## Core Features
+## Product Preview
 
-- TXT/Markdown/JSONL ingestion, fixed-character or Markdown-header splitting.
-- BM25, Dense, Hybrid RRF, normalized Weighted Fusion and optional reranking.
-- FAISS; adapters for Elasticsearch, Sentence Transformers, CrossEncoder and
-  OpenAI-compatible embedding endpoints.
-- Actual StageTrace inspection and Hit@K / Recall@K / MRR / NDCG evaluation.
-- Overview, Search, Inspector, Compare, Evaluation, Datasets and Settings; Chinese/
-  English UI, native Light/Dark themes, Plotly, and JSON/CSV/Markdown reports.
-- Session-local state, credential-redacted configuration, offline logic and AppTest tests.
+![Inspector ranking paths: independent BM25 and Dense recall feed fusion and reranking](docs/assets/screenshots/inspector-chart-desktop.png)
 
-## Screenshots & Demo
+**Visual Inspector** — follow candidates from independent recall through fusion and reranking.
+Actual application capture using bundled sample data and **Offline Pipeline Sanity Check**
+providers. Displayed timings describe one run, not production performance.
+[Browse the full gallery and capture recipe](docs/screenshots.md).
 
-Real Chrome screenshots of the running application, using bundled sample data and
-**Offline Pipeline Sanity Check** providers. Timings shown are individual runs,
-not production benchmarks. Long pages continue below each viewport.
+## Features
 
-<details>
-<summary>Seven-page desktop gallery (1440 × 1000)</summary>
+| Capability | What you can do |
+|---|---|
+| **Hybrid Retrieval** | Combine BM25 and Dense with RRF or weighted fusion; add an optional reranker. |
+| **Visual Inspector** | Inspect candidate ranks, scores, dropped candidates and stage timings. |
+| **Strategy Comparison** | Compare retrieval configurations on the same documents and relevance labels. |
+| **Evaluation** | Measure Hit@K, Recall@K, MRR and NDCG; inspect query timings and export reports. |
 
-**Overview**
-
-![Overview — actual desktop browser](docs/assets/screenshots/overview-desktop.png)
-
-**Search**
-
-![Search — actual desktop browser](docs/assets/screenshots/search-desktop.png)
-
-**Inspector**
-
-![Inspector — actual desktop browser](docs/assets/screenshots/inspector-desktop.png)
-
-**Compare**
-
-![Compare — actual desktop browser](docs/assets/screenshots/compare-desktop.png)
-
-**Evaluation**
-
-![Evaluation — actual desktop browser](docs/assets/screenshots/evaluation-desktop.png)
-
-**Datasets**
-
-![Datasets — actual desktop browser](docs/assets/screenshots/datasets-desktop.png)
-
-**Settings**
-
-![Settings — actual desktop browser](docs/assets/screenshots/settings-desktop.png)
-
-</details>
-
-<details>
-<summary>Narrow-screen example (390 × 844)</summary>
-
-![Search — actual narrow browser](docs/assets/screenshots/search-narrow.png)
-
-</details>
-
-<details>
-<summary>Native Dark theme and independent recall paths</summary>
-
-![Inspector — native Dark Plotly](docs/assets/screenshots/inspector-dark-desktop.png)
-
-</details>
-
-[All desktop/narrow captures, manifest and reproduction commands](docs/screenshots.md).
-No Demo GIF is claimed; local screen-recording steps are documented there.
+Import TXT, Markdown or JSONL. Start offline with FAISS, then configure learned
+embeddings, rerankers or an Elasticsearch adapter. [Providers and configuration](docs/configuration.md).
 
 ## Quick Start
 
-From the repository root with Python 3.11+ and uv installed:
+With **Python 3.11+** and [uv](https://docs.astral.sh/uv/getting-started/installation/)
+installed, run from the repository root:
 
 ```sh
 uv sync --locked
@@ -100,30 +52,24 @@ uv run python examples/readme_sdk.py
 uv run streamlit run src/rag_toolkit/web/app.py --server.address 127.0.0.1 --server.port 8507 --server.headless true
 ```
 
-Open [localhost:8507](http://127.0.0.1:8507), select **Datasets → Load sample data**,
-then Search or Evaluation. Installation may download packages; the default pipeline
-and examples do not download models. Explicit `configs/default.yaml` requests real
-local models and requires optional dependencies/weights; see [configuration](docs/configuration.md).
+Open [localhost:8507](http://127.0.0.1:8507), choose **Datasets → Load sample data**,
+run a Search, then open Inspector or Compare.
+
+The default pipeline uses offline sanity providers and needs no model downloads.
+Dependency installation may access the network. `configs/default.yaml` instead
+requests real local models; see the [configuration guide](docs/configuration.md).
 
 ## Python SDK Example
 
-The exact offline example in [examples/readme_sdk.py](examples/readme_sdk.py) is
-executed during documentation verification. Its hash/token providers validate the
-chain, not learned semantic retrieval quality.
+This **Offline Pipeline Sanity Check** uses hash embeddings and token-overlap
+reranking. It validates the chain, not learned semantic retrieval quality.
+The executable source is [examples/readme_sdk.py](examples/readme_sdk.py).
 
 ```python
-"""Exact README SDK example: Offline Pipeline Sanity Check, no model downloads."""
-
 from rag_toolkit.pipeline import RetrievalPipeline
 from rag_toolkit.schemas import Document
 
-pipeline = RetrievalPipeline.from_config(
-    {
-        "embedding": {"provider": "hash_stub", "dimension": 256},
-        "retriever": {"mode": "hybrid"},
-        "reranker": {"enabled": True, "provider": "token_overlap", "top_k": 10},
-    }
-)
+pipeline = RetrievalPipeline.from_config("configs/offline.yaml")
 pipeline.add_documents(
     [
         Document(id="intro", text="FAISS supports vector search."),
@@ -136,88 +82,45 @@ print("Offline Pipeline Sanity Check")
 print(response.model_dump_json(indent=2))
 ```
 
-## Retrieval Strategy Comparison
-
-| Strategy | Retrieval behavior | When to inspect it |
-|---|---|---|
-| BM25 | Lexical token matching | Exact vocabulary and zero-match omissions |
-| Dense | Configured embeddings + cosine search | Semantic model behavior; hash mode is sanity only |
-| Hybrid RRF | Independent recall lists fused by rank | Recall overlap and rank-based fusion |
-| Hybrid Weighted | Per-channel min-max scores, normalized weights | Weight sensitivity and candidate differences |
-| Hybrid + Reranker | Hybrid candidates rescored by configured reranker | Pool truncation and rerank changes |
-
-These are implemented strategies, not a claim that one wins on every corpus.
-Compare/Evaluation run the actual configured models; unavailable components are
-reported explicitly. Trace-based diagnosis is a **rule-based clue, not a confirmed root cause**.
-
-## Benchmark Results
-
-**Real-model/public-dataset benchmarks: not yet completed. No real-model scores
-or production latency claims are published.**
-
-The recorded offline sample indexes 6 chunks and evaluates 8 synthetic queries with
-HashEmbedder + TokenOverlapReranker. Its actual report and measured sanity metrics
-are documented separately in [benchmark status](docs/benchmarks.md) and the
-[raw sample report](datasets/evaluation-report.json). They are not semantic-model benchmarks.
-
 ## Architecture
 
-```mermaid
-flowchart LR
-    D[Documents] --> S[Split]
-    S --> B[BM25]
-    S --> E[Embedding / vector store]
-    Q[Query] --> B
-    Q --> E
-    B --> F[RRF / Weighted Fusion]
-    E --> F
-    F --> R[Optional Reranker]
-    R --> T[SearchResponse + StageTrace]
-    T --> W[Workbench / Evaluation]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/architecture-light.svg">
+  <img alt="Query → independent BM25 / Dense → Fusion → Optional Reranker → Results + StageTrace → Inspector / Evaluation" src="docs/assets/architecture-light.svg" width="680">
+</picture>
 
-BM25 and Dense are independent recall channels. The API and Web sessions own
-separate indexes. See [architecture and data contracts](docs/architecture.md).
+BM25 and Dense recall independently; the current implementation executes them
+sequentially. The diagram shows the hybrid path; reranking can be bypassed.
+[Algorithms, data contracts and index ownership](docs/architecture.md).
 
-## Configuration & Documentation
+## Benchmark Status
 
-| Guide | Contents |
+Real-model/public-dataset benchmarks are **not yet completed**.
+Offline sanity reports validate the pipeline only.
+[Benchmark status, recorded report and planned protocol](docs/benchmarks.md).
+
+## Documentation
+
+| Guide | Start here for |
 |---|---|
-| [Documentation index](docs/index.md) | All detailed guides |
-| [HTTP API](docs/api.md) | Routes, schemas, examples and error contracts |
-| [Configuration](docs/configuration.md) | Parameter table, providers and rebuild rules |
-| [Architecture](docs/architecture.md) | Algorithms, ownership and module layout |
-| [Web workbench](docs/web-workbench.md) | Seven-page workflows |
-| [Development](docs/development.md) | Offline tests, CI and Docker status |
-| [Known limits](docs/limitations.md) | Persistence, scale, integrations and privacy boundaries |
-
-Settings import/export is credential-redacted. Prefer `OPENAI_API_KEY` for API
-credentials. The pipeline is in memory; one API worker is required, and restarting
-loses local indexes. Optional live-model/Elasticsearch and Docker runtime validation
-remain outside this release's acceptance.
+| [Documentation index](docs/index.md) | All guides and project notes |
+| [Web workbench](docs/web-workbench.md) | Inspector, Compare and Evaluation workflows |
+| [Configuration](docs/configuration.md) | Providers, parameters and index rebuilds |
+| [Architecture](docs/architecture.md) | Retrieval strategies and data contracts |
+| [HTTP API](docs/api.md) | Routes, schemas and request examples |
+| [Development](docs/development.md) | Contribution, tests, CI and Docker |
+| [Known limits](docs/limitations.md) | In-memory state, scale and integration boundaries |
 
 ## Roadmap
 
-- [x] Modular retrieval, traces, evaluation and seven-page bilingual workbench.
-- [x] Offline tests, verified SDK examples and real browser screenshots.
-- [ ] Reproducible real-model/public-dataset benchmarks with raw outputs.
+- [x] Hybrid retrieval, stage traces, comparison and evaluation workbench.
+- [x] Offline verification and real application screenshots.
+- [ ] Reproducible real-model/public-dataset benchmarks with raw results.
 - [ ] Durable index restore, shared worker state and deployment authentication.
-- [ ] Concrete PDF and semantic splitting extensions (currently abstract interfaces).
-
-## Contributing
-
-Read [AGENTS.md](AGENTS.md) and the [development guide](docs/development.md). Keep
-interfaces compatible, business logic out of package initializers, tests offline,
-and both READMEs synchronized. Run:
-
-```sh
-uv run pytest
-uv run ruff check .
-uv run ruff format --check .
-uv run python scripts/verify_readme.py
-```
+- [ ] Concrete PDF loading and semantic splitting extensions.
 
 ## License
 
-[MIT](LICENSE). The original SVG assets are covered by the same license. Optional
-model weights and dependencies retain their own licenses.
+[MIT](LICENSE), including the original brand SVGs. Optional model weights and
+third-party dependencies retain their own licenses.

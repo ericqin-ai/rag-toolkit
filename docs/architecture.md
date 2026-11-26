@@ -81,3 +81,17 @@ transactional and old session indexes require an external cleanup policy.
 `web/services/` contains pure configuration/identity/comparison/report/status logic;
 page modules own Streamlit widgets. Trace clues are rule-based, never automatically
 confirmed root causes. Package initializers remain lightweight exports.
+
+## Retrieval strategy comparison
+
+| Strategy | Retrieval behavior | What to inspect |
+|---|---|---|
+| BM25 | Lexical token matching | Exact vocabulary and zero-match omissions |
+| Dense | Configured embeddings and cosine search | Semantic behavior; hash mode validates the chain only |
+| Hybrid RRF | Independent recall lists fused by rank | Recall overlap and rank-based fusion |
+| Hybrid Weighted | Per-channel min-max scores and normalized weights | Weight sensitivity and candidate differences |
+| Hybrid + Reranker | Configured reranker rescores the candidate pool | Pool truncation and rank changes |
+
+These are implemented strategies, not a claim that one always wins. Compare and
+Evaluation use configured providers; unavailable components are reported explicitly.
+Trace diagnosis is a rule-based clue, not a confirmed root cause.

@@ -58,7 +58,15 @@ Detailed privacy, deployment and integration limits are in [known limits](limita
 
 ## Visual assets
 
-`docs/assets/logo.svg` and `banner.svg` are original repository-native vectors using
-basic paths, shapes and system-font text, with accessible SVG title/description.
-Two separate input branches joining a ranked result are the project mark; no external
-image generation, copied brand assets, trackers or remote fonts are embedded.
+Original editable SVGs live in `docs/assets/`: `logo-{light,dark}.svg`,
+`banner-{light,dark}.svg`, and `architecture-{light,dark}.svg`.
+`logo.svg` and `banner.svg` remain light-theme compatibility copies.
+Three stacked layers represent retrieval processing, with a selected-result stroke.
+README picture elements select themes via `prefers-color-scheme`; their fallback is light.
+No generated application UI, remote fonts, copied branding or tracking is included.
+
+Palette: primary #6366F1, primary dark #4338CA, secondary #A5B4FC,
+success #10B981 (reserved for verified status), dark #0F172A, light #F8FAFC.
+Segoe UI/Arial are system-font choices; body text stays native GitHub Markdown.
+Banner ratio is 4:1; the portrait architecture stays legible on narrow screens.
+See the [brand refresh review](readme-refresh.md) for migration and verification evidence.

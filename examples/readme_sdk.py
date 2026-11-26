@@ -1,15 +1,7 @@
-"""Exact README SDK example: Offline Pipeline Sanity Check, no model downloads."""
-
 from rag_toolkit.pipeline import RetrievalPipeline
 from rag_toolkit.schemas import Document
 
-pipeline = RetrievalPipeline.from_config(
-    {
-        "embedding": {"provider": "hash_stub", "dimension": 256},
-        "retriever": {"mode": "hybrid"},
-        "reranker": {"enabled": True, "provider": "token_overlap", "top_k": 10},
-    }
-)
+pipeline = RetrievalPipeline.from_config("configs/offline.yaml")
 pipeline.add_documents(
     [
         Document(id="intro", text="FAISS supports vector search."),

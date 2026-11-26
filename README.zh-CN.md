@@ -1,95 +1,50 @@
-# RAG Toolkit
-
-![RAG Toolkit — 检索工作台](docs/assets/banner.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner-light.svg">
+  <img alt="rag-toolkit — Build. Inspect. Compare. Evaluate." src="docs/assets/banner-light.svg" width="1200">
+</picture>
 
 [![CI](https://github.com/ericqin-ai/rag-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/ericqin-ai/rag-toolkit/actions/workflows/ci.yml)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-6366F1)](pyproject.toml)
+[![MIT License](https://img.shields.io/badge/license-MIT-6366F1)](LICENSE)
 
 [English](README.md) | **简体中文**
 
-## 项目简介
+# rag-toolkit
 
-轻量 Python 检索工具箱与双语 Retrieval Workbench，支持混合检索、重排、链路检查和评测。
-可通过 Python SDK、FastAPI 或七个 Streamlit 页面调用真实检索流程。
-本项目负责检索和评估证据，不生成 LLM 答案。
+**面向检索算法工程师的开源实验工作台。**
 
-## 为什么选择 RAG Toolkit
+Build. Inspect. Compare. Evaluate.
 
-- 查看各阶段全部候选、分数、排名和耗时，保留被淘汰的候选。
-- 在同一份数据与标注上对比词项、向量、融合及重排策略。
-- 从 CPU 离线链路验证开始，再单独配置真实模型服务。
-- BM25 与 Dense 独立展示；明确索引重建边界，配置导出统一脱敏。
+通过 Python SDK 与可视化工作台构建混合检索链路、检查候选排名、对比策略，
+并使用自己的文档和相关性标注评估检索效果。
+
+[快速开始](#快速开始) · [文档](docs/index.md) · [截图](docs/screenshots.md)
+
+## 产品预览
+
+![Inspector 排名路径：BM25 与 Dense 独立召回，经融合与重排输出结果](docs/assets/screenshots/inspector-chart-desktop.png)
+
+**Visual Inspector**：沿独立召回、融合和重排阶段追踪候选排名。
+截图来自实际应用，使用仓库样例数据与 **Offline Pipeline Sanity Check** Provider。
+画面耗时仅属于单次运行，不代表生产性能。[完整截图与复现方式](docs/screenshots.md)。
 
 ## 核心功能
 
-- TXT/Markdown/JSONL 导入；固定字符长度或 Markdown 标题切分。
-- BM25、Dense、Hybrid RRF、归一化加权融合与可选 Reranker。
-- FAISS；Elasticsearch、Sentence Transformers、CrossEncoder 和 OpenAI 兼容嵌入适配器。
-- 实际 StageTrace，以及 Hit@K / Recall@K / MRR / NDCG 评测。
-- Overview、Search、Inspector、Compare、Evaluation、Datasets、Settings 七页；
-  中英文切换、原生 Light/Dark、Plotly 和 JSON/CSV/Markdown 报告。
-- 会话隔离、配置凭据脱敏、离线逻辑测试与 AppTest 交互测试。
+| 能力 | 可以做什么 |
+|---|---|
+| **Hybrid Retrieval · 混合检索** | BM25 与 Dense 独立召回，支持 RRF、加权融合及可选重排。 |
+| **Visual Inspector · 链路检查** | 查看候选排名、分数、淘汰情况及各阶段耗时。 |
+| **Strategy Comparison · 策略对比** | 基于相同文档与相关性标注，对比不同检索配置。 |
+| **Evaluation · 效果评测** | 计算 Hit@K、Recall@K、MRR、NDCG，查看查询耗时并导出报告。 |
 
-## 截图与演示
-
-以下是实际启动应用后由 Chrome 截取的真实画面，使用仓库样例与
-**Offline Pipeline Sanity Check** 实现。画面中的耗时仅属于该次运行，不代表生产 Benchmark。
-长页面可继续向下滚动。
-
-<details>
-<summary>七个页面的桌面截图（1440 × 1000）</summary>
-
-**Overview**
-
-![Overview — actual desktop browser](docs/assets/screenshots/overview-desktop.png)
-
-**Search**
-
-![Search — actual desktop browser](docs/assets/screenshots/search-desktop.png)
-
-**Inspector**
-
-![Inspector — actual desktop browser](docs/assets/screenshots/inspector-desktop.png)
-
-**Compare**
-
-![Compare — actual desktop browser](docs/assets/screenshots/compare-desktop.png)
-
-**Evaluation**
-
-![Evaluation — actual desktop browser](docs/assets/screenshots/evaluation-desktop.png)
-
-**Datasets**
-
-![Datasets — actual desktop browser](docs/assets/screenshots/datasets-desktop.png)
-
-**Settings**
-
-![Settings — actual desktop browser](docs/assets/screenshots/settings-desktop.png)
-
-</details>
-
-<details>
-<summary>窄屏示例（390 × 844）</summary>
-
-![Search — 真实窄屏画面](docs/assets/screenshots/search-narrow.png)
-
-</details>
-
-<details>
-<summary>原生 Dark 主题与独立召回通道</summary>
-
-![Inspector — native Dark Plotly](docs/assets/screenshots/inspector-dark-desktop.png)
-
-</details>
-
-[全部桌面/窄屏截图、记录清单与复现命令](docs/screenshots.md)。未提供 Demo GIF；
-文档中列出了本地录屏步骤，没有用设计图代替应用截图。
+导入 TXT、Markdown 或 JSONL，以 FAISS 离线起步，再配置真实嵌入模型、
+重排模型或 Elasticsearch 适配器。[Provider 与配置](docs/configuration.md)。
 
 ## 快速开始
 
-安装 Python 3.11+ 与 uv 后，在仓库根目录运行：
+安装 **Python 3.11+** 与 [uv](https://docs.astral.sh/uv/getting-started/installation/)，
+在仓库根目录运行：
 
 ```sh
 uv sync --locked
@@ -97,29 +52,23 @@ uv run python examples/readme_sdk.py
 uv run streamlit run src/rag_toolkit/web/app.py --server.address 127.0.0.1 --server.port 8507 --server.headless true
 ```
 
-打开 [localhost:8507](http://127.0.0.1:8507)，选择 **Datasets → 加载样例数据**，再使用
-Search 或 Evaluation。安装依赖可能联网；默认链路和示例不下载模型。
-显式加载 `configs/default.yaml` 会使用真实本地模型，需要额外依赖与模型权重，详见
-[配置指南](docs/configuration.md)。
+打开 [localhost:8507](http://127.0.0.1:8507)，选择 **Datasets → 加载样例数据**，
+执行 Search，再打开 Inspector 或 Compare。
+
+默认链路使用离线验证 Provider，无须下载模型；安装依赖可能联网。
+`configs/default.yaml` 使用真实本地模型，所需依赖与权重见[配置指南](docs/configuration.md)。
 
 ## Python SDK 示例
 
-以下代码与 [examples/readme_sdk.py](examples/readme_sdk.py) 一致，已实际执行验证。
-Hash/词项重排用于验证链路，不代表真实语义模型的检索质量。
+此 **Offline Pipeline Sanity Check** 使用 Hash 嵌入和词项重排，
+用于验证链路，不代表真实语义模型的检索质量。
+可执行源码见 [examples/readme_sdk.py](examples/readme_sdk.py)。
 
 ```python
-"""Exact README SDK example: Offline Pipeline Sanity Check, no model downloads."""
-
 from rag_toolkit.pipeline import RetrievalPipeline
 from rag_toolkit.schemas import Document
 
-pipeline = RetrievalPipeline.from_config(
-    {
-        "embedding": {"provider": "hash_stub", "dimension": 256},
-        "retriever": {"mode": "hybrid"},
-        "reranker": {"enabled": True, "provider": "token_overlap", "top_k": 10},
-    }
-)
+pipeline = RetrievalPipeline.from_config("configs/offline.yaml")
 pipeline.add_documents(
     [
         Document(id="intro", text="FAISS supports vector search."),
@@ -132,82 +81,43 @@ print("Offline Pipeline Sanity Check")
 print(response.model_dump_json(indent=2))
 ```
 
-## 检索策略对比
-
-| 策略 | 实际行为 | 适合检查 |
-|---|---|---|
-| BM25 | 词项匹配 | 精确词汇、零匹配遗漏 |
-| Dense | 配置的 Embedding + 余弦检索 | 模型语义表现；Hash 模式仅用于验证 |
-| Hybrid RRF | 独立召回通道按排名融合 | 召回重叠与排名融合 |
-| Hybrid Weighted | 通道内 min-max 分数与归一化权重 | 权重敏感性和候选差异 |
-| Hybrid + Reranker | 重排 Hybrid 候选池 | 候选截断与重排名次变化 |
-
-以上是已实现的策略，不宣称某一策略适用于所有语料。Compare/Evaluation 运行实际配置的模型，
-缺失组件会明确标记不可用。StageTrace 诊断是**规则推断线索，不是已确认根因**。
-
-## Benchmark 结果
-
-**尚未完成真实模型与公开数据集 Benchmark；不公布虚构的真实模型分数或生产延迟。**
-
-已记录的离线样例使用 HashEmbedder + TokenOverlapReranker，索引 6 个 Chunk、评估 8 条合成 Query。
-真实运行报告与链路验证指标见 [评测状态说明](docs/benchmarks.md) 和
-[样例原始报告](datasets/evaluation-report.json)，不能视为语义模型 Benchmark。
-
 ## 架构
 
-```mermaid
-flowchart LR
-    D[Documents] --> S[Split]
-    S --> B[BM25]
-    S --> E[Embedding / vector store]
-    Q[Query] --> B
-    Q --> E
-    B --> F[RRF / Weighted Fusion]
-    E --> F
-    F --> R[Optional Reranker]
-    R --> T[SearchResponse + StageTrace]
-    T --> W[Workbench / Evaluation]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/architecture-light.svg">
+  <img alt="Query → independent BM25 / Dense → Fusion → Optional Reranker → Results + StageTrace → Inspector / Evaluation" src="docs/assets/architecture-light.svg" width="680">
+</picture>
 
-BM25 与 Dense 是独立召回通道；API 与各个 Web 会话分别拥有索引。
-详见 [架构与数据契约](docs/architecture.md)。
+BM25 与 Dense 是独立召回通道，当前实现按顺序执行。
+图中展示混合检索路径；重排可跳过。[算法、数据契约与索引归属](docs/architecture.md)。
 
-## 配置与文档
+## Benchmark 状态
 
-| 文档 | 内容 |
+真实模型与公开数据集 Benchmark **尚未完成**。
+离线验证报告仅用于确认链路可运行。
+[评测状态、已记录报告与后续协议](docs/benchmarks.md)。
+
+## 文档
+
+| 指南 | 内容 |
 |---|---|
-| [文档索引](docs/index.md) | 全部详细指南（英文） |
-| [HTTP API](docs/api.md) | 路由、结构、示例与错误契约 |
-| [配置参数](docs/configuration.md) | 参数表、Provider 与重建规则 |
-| [架构设计](docs/architecture.md) | 算法、状态归属与模块分层 |
-| [Web 工作台](docs/web-workbench.md) | 七页工作流 |
-| [开发指南](docs/development.md) | 离线测试、CI 与 Docker 验证范围 |
-| [已知限制](docs/limitations.md) | 持久化、规模、可选集成与隐私边界 |
-
-Settings 配置导入导出严格脱敏，API 凭据优先通过 `OPENAI_API_KEY` 管理。
-索引保存在内存中；API 应使用单 worker，重启会丢失本地索引。
-真实模型/Elasticsearch 在线集成与 Docker 容器运行尚未纳入本次验收。
+| [文档索引](docs/index.md) | 全部指南与项目记录（详细文档为英文） |
+| [Web 工作台](docs/web-workbench.md) | Inspector、Compare 与 Evaluation 工作流 |
+| [配置](docs/configuration.md) | Provider、参数与索引重建 |
+| [架构](docs/architecture.md) | 检索策略与数据契约 |
+| [HTTP API](docs/api.md) | 路由、结构与请求示例 |
+| [开发指南](docs/development.md) | 贡献、测试、CI 与 Docker |
+| [已知限制](docs/limitations.md) | 内存状态、规模与集成边界 |
 
 ## 路线图
 
-- [x] 模块化检索、Trace、评测与七页双语工作台。
-- [x] 离线测试、已验证 SDK 示例与真实浏览器截图。
-- [ ] 可复现的真实模型/公开数据集评测及原始输出。
+- [x] 混合检索、StageTrace、策略对比与评测工作台。
+- [x] 离线验证与真实应用截图。
+- [ ] 可复现的真实模型/公开数据集 Benchmark 及原始输出。
 - [ ] 索引恢复、多 worker 共享状态与部署鉴权。
-- [ ] PDF 与语义切分的具体扩展（当前为抽象接口）。
-
-## 参与贡献
-
-请阅读 [AGENTS.md](AGENTS.md) 与 [开发指南](docs/development.md)。保持公开接口兼容，
-不要在包初始化文件中写业务逻辑，测试保持离线，并同步两种语言的 README。运行：
-
-```sh
-uv run pytest
-uv run ruff check .
-uv run ruff format --check .
-uv run python scripts/verify_readme.py
-```
+- [ ] PDF 加载与语义切分的具体扩展实现。
 
 ## 开源许可
 
-[MIT](LICENSE)。原创 SVG 资产使用相同许可；可选模型权重与第三方依赖保留各自的许可。
+[MIT](LICENSE)，包含原创品牌 SVG。可选模型权重与第三方依赖保留各自许可。

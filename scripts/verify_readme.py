@@ -39,18 +39,22 @@ def main():
         *sorted((ROOT / "docs").glob("*.md")),
     ]:
         text = source.read_text(encoding="utf-8-sig")
-        for target in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", text):
+        targets = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", text)
+        targets += re.findall(r'(?:src|srcset)="([^"]+)"', text)
+        for target in targets:
             if target.startswith(("http:", "https:", "#", "mailto:")):
                 continue
             destination = source.parent / unquote(target.split("#")[0])
             if not destination.exists():
                 raise SystemExit(f"Broken link in {source.name}: {target}")
             checked += 1
-    for name in ["logo.svg", "banner.svg"]:
+    assets = sorted((ROOT / "docs/assets").glob("*.svg"))
+    for asset in assets:
+        name = asset.name
         root = ET.parse(ROOT / "docs/assets" / name).getroot()
         if root.tag != "{http://www.w3.org/2000/svg}svg":
             raise SystemExit(f"Invalid SVG: {name}")
-    print(f"{checked} local documentation links verified; 2 SVG assets parsed")
+    print(f"{checked} local documentation links verified; {len(assets)} SVG assets parsed")
     captures_root = ROOT / "docs/assets/screenshots"
     manifest = json.loads((captures_root / "manifest.json").read_text(encoding="utf-8"))
     expected_views = {
