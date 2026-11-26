@@ -1,20 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
-  <title id="title">RAG Toolkit</title>
-  <desc id="desc">Modular retrieval, transparent ranking, reproducible evaluation. Python 3.11+, CPU first, MIT.</desc>
-  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#17334b"/></linearGradient></defs>
-  <rect width="1200" height="280" rx="20" fill="url(#bg)"/>
-  <circle cx="1100" cy="40" r="190" fill="#67e8f9" opacity=".04"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-labelledby="title desc">
+  <title id="title">RAG Toolkit — Retrieval Workbench</title>
+  <desc id="desc">A modular Python toolkit. Independent BM25 and dense recall feed fusion, optional reranking and inspectable traces.</desc>
+  <rect width="1280" height="320" rx="20" fill="#101C30"/>
+  <g transform="translate(48 64)" fill="none" stroke="#54DCC4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 20h21l24 28h18M15 76h21l24-28"/>
+    <rect x="2" y="9" width="19" height="22" rx="5"/><rect x="2" y="65" width="19" height="22" rx="5"/>
+    <rect x="74" y="31" width="23" height="34" rx="6" fill="#F3F7FC" stroke="none"/>
+  </g>
   <g font-family="Segoe UI,Arial,sans-serif">
-    <text x="48" y="52" fill="#5eead4" font-size="13" letter-spacing="3">RETRIEVAL / EXPLAINABILITY / EVALUATION</text>
-    <text x="46" y="118" fill="#f8fafc" font-size="58" font-weight="700">RAG Toolkit</text>
-    <text x="48" y="157" fill="#cbd5e1" font-size="18">Modular search. Transparent ranking. Reproducible evaluation.</text>
-    <g fill="#153a47" stroke="#2b6570"><rect x="48" y="192" width="122" height="32" rx="16"/><rect x="182" y="192" width="110" height="32" rx="16"/><rect x="304" y="192" width="72" height="32" rx="16"/></g>
-    <g fill="#c5f8ee" font-size="13" text-anchor="middle"><text x="109" y="213">Python 3.11+</text><text x="237" y="213">CPU first</text><text x="340" y="213">MIT</text></g>
-    <g transform="translate(770 86)" text-anchor="middle" font-size="14">
-      <path d="M0 40H270" stroke="#5eead4" stroke-width="3"/>
-      <g fill="#17334b" stroke="#5eead4" stroke-width="2"><rect x="-38" width="86" height="80" rx="14"/><rect x="94" width="86" height="80" rx="14"/><rect x="226" width="86" height="80" rx="14"/></g>
-      <g fill="#e2e8f0"><text x="5" y="35">Retrieve</text><text x="5" y="56" font-size="11" fill="#94a3b8">BM25 + Dense</text><text x="137" y="35">Rerank</text><text x="137" y="56" font-size="11" fill="#94a3b8">Fuse + Score</text><text x="269" y="35">Inspect</text><text x="269" y="56" font-size="11" fill="#94a3b8">Trace + Eval</text></g>
+    <text x="174" y="86" font-size="13" fill="#54DCC4" letter-spacing="2">RETRIEVAL WORKBENCH</text>
+    <text x="170" y="144" font-size="54" font-weight="700" fill="#F3F7FC">RAG Toolkit</text>
+    <text x="48" y="210" font-size="22" fill="#D3DEEC">Build retrieval. Inspect ranking. Evaluate changes.</text>
+    <text x="48" y="267" font-size="14" fill="#9BADBF">PYTHON 3.11+  /  FASTAPI  /  STREAMLIT + PLOTLY  /  MIT</text>
+    <g fill="none" stroke="#426078" stroke-width="2">
+      <path d="M893 101h34l34 59h26M893 219h34l34-59M1083 160h32"/>
+      <rect x="765" y="76" width="128" height="50" rx="10"/>
+      <rect x="765" y="194" width="128" height="50" rx="10"/>
+      <rect x="987" y="135" width="96" height="50" rx="10"/>
+      <rect x="1115" y="135" width="116" height="50" rx="10"/>
     </g>
-    <text x="48" y="256" fill="#94a3b8" font-size="12">FAISS · HYBRID SEARCH · FASTAPI · STREAMLIT</text>
+    <g font-size="15" text-anchor="middle" fill="#E4EDF7">
+      <text x="829" y="107">BM25</text><text x="829" y="225">Dense</text>
+      <text x="1035" y="166">Fusion</text><text x="1173" y="166">Inspect</text>
+    </g>
+    <text x="995" y="224" font-size="12" fill="#9BADBF">OPTIONAL RERANKING + STAGETRACE</text>
   </g>
 </svg>

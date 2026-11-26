@@ -6,10 +6,11 @@ from rag_toolkit.utils import positive_k, ranked, tokenize
 
 
 class BM25Retriever(BaseRetriever):
-    def __init__(self, chunks=(), k1: float = 1.5, b: float = 0.75):
+    def __init__(self, chunks=(), k1: float = 1.5, b: float = 0.75, tokenizer=None):
         if not math.isfinite(k1) or k1 <= 0 or not 0 <= b <= 1:
             raise ValueError("invalid BM25 parameters")
         self.k1, self.b = k1, b
+        self.tokenizer = tokenizer or tokenize
         self.chunks = {}
         self.add_chunks(chunks)
 
@@ -23,7 +24,7 @@ class BM25Retriever(BaseRetriever):
         self._rebuild()
 
     def _rebuild(self):
-        self.terms = {key: Counter(tokenize(c.text)) for key, c in self.chunks.items()}
+        self.terms = {key: Counter(self.tokenizer(c.text)) for key, c in self.chunks.items()}
         self.df = Counter(term for tf in self.terms.values() for term in tf)
         self.lengths = {key: sum(tf.values()) for key, tf in self.terms.items()}
         self.avgdl = sum(self.lengths.values()) / max(1, len(self.chunks))
@@ -35,7 +36,7 @@ class BM25Retriever(BaseRetriever):
         scores = {}
         for key, tf in self.terms.items():
             score = 0
-            for term in set(tokenize(query)):
+            for term in set(self.tokenizer(query)):
                 count = tf[term]
                 if not count:
                     continue

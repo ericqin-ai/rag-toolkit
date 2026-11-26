@@ -1,0 +1,209 @@
+{
+  "captured_at": "2026-11-26T03:31:25.488Z",
+  "app_url": "http://127.0.0.1:8507",
+  "data": "Bundled MIT samples",
+  "purpose": "Offline Pipeline Sanity Check",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/158.0.8127.38",
+    "revision": "@bd978cc8489e498e709a40f55b1037e521b5a22d",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "jsVersion": "15.8.62.31"
+  },
+  "captures": [
+    {
+      "page": "Overview",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "overview-desktop.png",
+      "title": "Overview",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Search",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "search-desktop.png",
+      "title": "Search",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Inspector",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "inspector-desktop.png",
+      "title": "Inspector",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Inspector",
+      "layout": "desktop-chart",
+      "width": 1440,
+      "height": 1000,
+      "file": "inspector-chart-desktop.png",
+      "title": "Inspector",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Compare",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "compare-desktop.png",
+      "title": "Compare",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Evaluation",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "evaluation-desktop.png",
+      "title": "Evaluation",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Evaluation",
+      "layout": "desktop-chart",
+      "width": 1440,
+      "height": 1000,
+      "file": "evaluation-chart-desktop.png",
+      "title": "Evaluation",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Datasets",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "datasets-desktop.png",
+      "title": "Datasets",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Settings",
+      "layout": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "file": "settings-desktop.png",
+      "title": "Settings",
+      "exceptions": 0,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    {
+      "page": "Overview",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "overview-narrow.png",
+      "title": "Overview",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Search",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "search-narrow.png",
+      "title": "Search",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Inspector",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "inspector-narrow.png",
+      "title": "Inspector",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Compare",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "compare-narrow.png",
+      "title": "Compare",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Evaluation",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "evaluation-narrow.png",
+      "title": "Evaluation",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Datasets",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "datasets-narrow.png",
+      "title": "Datasets",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Settings",
+      "layout": "narrow",
+      "width": 390,
+      "height": 844,
+      "file": "settings-narrow.png",
+      "title": "Settings",
+      "exceptions": 0,
+      "viewportWidth": 390,
+      "documentWidth": 390
+    },
+    {
+      "page": "Search",
+      "layout": "desktop-dark",
+      "width": 1440,
+      "height": 1000,
+      "file": "search-dark-desktop.png",
+      "lightColor": "rgb(47, 45, 43)",
+      "darkColor": "rgb(237, 235, 232)"
+    },
+    {
+      "page": "Inspector",
+      "layout": "desktop-dark",
+      "width": 1440,
+      "height": 1000,
+      "file": "inspector-dark-desktop.png",
+      "theme": "Native Streamlit Dark with Plotly"
+    }
+  ],
+  "note": "Actual application viewport screenshots; not mockups. Long pages scroll below the frame."
+}

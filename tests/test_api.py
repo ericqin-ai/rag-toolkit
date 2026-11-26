@@ -76,17 +76,18 @@ def test_invalid_requests_have_standard_error(client, path, payload):
     assert response.json()["error"]["details"]
 
 
-def test_backend_exception_is_sanitized():
+def test_backend_exception_is_sanitized(caplog):
     class BrokenPipeline(RetrievalPipeline):
         def search(self, query, top_k=10):
             raise RuntimeError("secret-provider-key")
 
     pipeline = BrokenPipeline.from_config({"retriever": {"mode": "bm25"}})
-    with TestClient(create_app(pipeline=pipeline), raise_server_exceptions=False) as client:
+    with TestClient(create_app(pipeline=pipeline)) as client:
         response = client.post("/search", json={"query": "apple"})
         assert response.status_code == 500
         assert response.json()["error"]["code"] == "internal_error"
         assert "secret-provider-key" not in response.text
+        assert "secret-provider-key" not in caplog.text
 
 
 def test_openapi_documents_response_contracts(client):

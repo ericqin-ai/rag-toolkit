@@ -4,7 +4,7 @@
 def ranking_rows(response):
     stages = [trace.stage for trace in response.traces]
     rows = {}
-    for index, trace in enumerate(response.traces):
+    for trace in response.traces:
         for item in trace.candidates:
             key = (item.doc_id, item.chunk_id)
             row = rows.setdefault(
@@ -22,13 +22,23 @@ def ranking_rows(response):
             )
             row[f"{trace.stage}_rank"] = item.rank
             row[f"{trace.stage}_score"] = item.score
-            previous = row.get(f"{stages[index - 1]}_rank") if index else None
+            previous = (
+                row.get("fusion_rank") or row.get("bm25_rank") or row.get("dense_rank")
+                if trace.stage == "rerank"
+                else None
+            )
             if previous is not None:
                 row[f"{trace.stage}_rank_change"] = previous - item.rank
+            if trace.stage == "fusion":
+                for channel in ("bm25", "dense"):
+                    rank = row.get(f"{channel}_rank")
+                    row[f"fusion_from_{channel}_change"] = rank - item.rank if rank else None
     for result in response.results:
         key = (result.doc_id, result.chunk_id)
         if key in rows:
             rows[key]["final_rank"] = result.rank
+    for row in rows.values():
+        row["status"] = "retained" if row["final_rank"] is not None else "dropped"
     return sorted(
         rows.values(),
         key=lambda row: (

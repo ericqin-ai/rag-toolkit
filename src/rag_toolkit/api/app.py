@@ -66,10 +66,10 @@ def create_app(config=None, *, pipeline=None) -> FastAPI:
     @app.exception_handler(Exception)
     async def internal_error(request: Request, exc: Exception):
         logger.error(
-            "Request failed: %s %s",
+            "Request failed: %s %s (%s)",
             request.method,
             request.url.path,
-            exc_info=(type(exc), exc, exc.__traceback__),
+            type(exc).__name__,
         )
         return JSONResponse(
             status_code=500,
@@ -81,6 +81,15 @@ def create_app(config=None, *, pipeline=None) -> FastAPI:
                 }
             },
         )
+
+    @app.middleware("http")
+    async def sanitized_backend_boundary(request: Request, call_next):
+        # Handle endpoint failures before ServerErrorMiddleware can re-raise them
+        # into the ASGI server's raw exception logger. Public errors stay unchanged.
+        try:
+            return await call_next(request)
+        except Exception as exc:
+            return await internal_error(request, exc)
 
     @app.get("/health", response_model=HealthResponse)
     def health():

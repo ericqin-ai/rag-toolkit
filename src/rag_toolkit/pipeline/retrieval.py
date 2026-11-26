@@ -16,6 +16,7 @@ from rag_toolkit.schemas import Document, SearchResponse, SearchResult, StageTra
 from rag_toolkit.splitters import FixedLengthSplitter, MarkdownHeaderSplitter
 from rag_toolkit.stores import ElasticsearchStoreAdapter, FAISSVectorStore
 from rag_toolkit.utils import positive_k
+from rag_toolkit.utils.text import tokenize, whitespace_tokenize
 
 
 class RetrievalPipeline:
@@ -30,13 +31,14 @@ class RetrievalPipeline:
         bm25_top_k=20,
         dense_top_k=20,
         rerank_top_k=10,
+        bm25_tokenizer=None,
     ):
         if mode not in {"bm25", "dense", "hybrid"}:
             raise ValueError("unknown retrieval mode")
         if mode != "bm25" and (embedder is None or store is None):
             raise ValueError("dense/hybrid mode requires embedder and store")
         self.splitter, self.mode = splitter, mode
-        self.bm25 = BM25Retriever()
+        self.bm25 = BM25Retriever(tokenizer=bm25_tokenizer)
         self.dense = DenseRetriever(embedder, store) if mode != "bm25" else None
         self.fusion = fusion if fusion is not None else RRFFusion()
         self.reranker = reranker
@@ -54,7 +56,7 @@ class RetrievalPipeline:
                 config = yaml.safe_load(stream)
         if not isinstance(config, Mapping):
             raise ValueError("configuration must be a mapping")
-        allowed = {"splitter", "embedding", "store", "retriever", "fusion", "reranker"}
+        allowed = {"splitter", "embedding", "store", "retriever", "fusion", "reranker", "tokenizer"}
         if set(config) - allowed:
             raise ValueError(f"unknown configuration sections: {set(config) - allowed}")
         for name, value in config.items():
@@ -80,6 +82,10 @@ class RetrievalPipeline:
             if value not in options:
                 raise ValueError(f"unknown component {value!r}; expected one of {sorted(options)}")
         mode = retrieval.get("mode", "hybrid")
+        tokenizers = {"builtin": tokenize, "whitespace": whitespace_tokenize}
+        tokenizer_name = config.get("tokenizer", {}).get("type", "builtin")
+        if tokenizer_name not in tokenizers:
+            raise ValueError("unknown lexical tokenizer")
         # Validate numerical settings before constructing any network-capable provider.
         for key in ("bm25_top_k", "dense_top_k"):
             positive_k(retrieval.get(key, 20))
@@ -133,6 +139,7 @@ class RetrievalPipeline:
             retrieval.get("bm25_top_k", 20),
             retrieval.get("dense_top_k", 20),
             config.get("reranker", {}).get("top_k", 10),
+            bm25_tokenizer=tokenizers[tokenizer_name],
         )
 
     def add_documents(self, documents: Sequence[Document]) -> int:

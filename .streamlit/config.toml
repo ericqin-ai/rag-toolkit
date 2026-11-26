@@ -1,0 +1,15 @@
+# Leave theme.base unset: Streamlit follows the user-selected Light/Dark theme.
+[theme]
+font = "sans-serif"
+
+[theme.light]
+primaryColor = "#2563EB"
+
+[theme.dark]
+primaryColor = "#60A5FA"
+
+[client]
+showErrorDetails = "none"
+
+[browser]
+gatherUsageStats = false
